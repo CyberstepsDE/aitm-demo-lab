@@ -15,8 +15,8 @@ reverse-proxying to the real `login.microsoftonline.com`. A browser running on t
 Chronological build/debug log (every dead end, for whoever maintains this next): `ENVIRONMENT-SETUP.md`.
 
 **This repo is public — it contains no secrets on purpose.** The demo account's password and TOTP
-secret are distributed separately, out of band (instructor-only channel, not in this repo). If
-you're an instructor running this and don't have them, ask Roman.
+secret live in the Academic Instruction of the Module 2 session "SE 5 Bypassing MFA" in the LMS (staff only), not in this repo. If
+you're an instructor running this and can't open it, ask Roman.
 
 ## 1. What this demonstrates
 
@@ -55,7 +55,7 @@ evilginx's own DNS server, so the HTTPS side (the actual demo) works fine regard
 `systemd-resolved` to "fix" this — it breaks the VM's normal DNS for no benefit.
 
 **The demo account already exists** — don't recreate it. Get the UPN, password, and TOTP secret from
-your instructor-only channel (not in this repo — see the note at the top). If you need a fresh
+the Academic Instruction of the Module 2 session "SE 5 Bypassing MFA" in the LMS (staff only), not in this repo (see the note at the top). If you need a fresh
 account for a new cohort, see "Rebuilding the demo account" in `ENVIRONMENT-SETUP.md` — it requires
 a human (not an AI session) to actually create the Entra user and enroll MFA; that's deliberate, see
 that doc for why.
@@ -89,7 +89,7 @@ directory is gitignored/local, so generate it fresh each time you set up on a ne
 **Terminal 2 — generate the live MFA code when needed:**
 
 ```bash
-oathtool --totp -b <TOTP secret from your instructor-only channel>
+oathtool --totp -b <TOTP secret from the session's Academic Instruction in the LMS>
 ```
 
 Codes expire every ~30s — run it right when the MFA screen appears, not before.
@@ -104,7 +104,7 @@ preinstalled — a private window keeps the demo from reusing any cached session
    warning is what would normally tip someone off.
    - Firefox: "Advanced..." → "Accept the Risk and Continue".
    - Chrome (if you're demoing from Chrome instead): "Advanced" → "Proceed to ... (unsafe)".
-3. Log in with the UPN + password from your instructor-only channel.
+3. Log in with the UPN + password from the session's Academic Instruction in the LMS.
 4. When prompted for a code, switch to Terminal 2, run `oathtool`, type the code in.
 5. You land on a normal-looking Microsoft 365 page (`m365.cloud.microsoft`) — login succeeded, from
    the victim's point of view nothing was wrong.
